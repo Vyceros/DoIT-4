@@ -40,11 +40,17 @@ namespace DoIT.Controllers
             return await _lectorService.GetLectorById(id);
         }
         [HttpPut("{id}")]
-        public async Task<LectorCreateDTO> EditLector([FromRoute]int id,[FromBody] LectorCreateDTO lector)
+        public async Task<LectorCreateDTO> EditLector(int id, LectorCreateDTO lector)
         {
             return await _lectorService.UpdateLector(id,lector);
             
         }
+        /*[HttpPut("{id}")]
+        public async Task<LectorCreateDTO> EditLector([FromRoute] int id, [FromBody] LectorCreateDTO lector)
+        {
+            return await _lectorService.UpdateLector(id, lector);
+
+        }*/
 
     }
 }
