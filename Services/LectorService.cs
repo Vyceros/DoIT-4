@@ -81,7 +81,7 @@ namespace DoIT.Services
         {
             try
             {
-                var lector = _db.Lectors.FirstOrDefaultAsync(x => x.Id == id);
+                var lector = _db.Lectors.Include(x => x.Students).FirstOrDefaultAsync(x => x.Id == id);
                 return await lector;
 
             }

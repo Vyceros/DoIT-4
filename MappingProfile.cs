@@ -9,6 +9,7 @@ namespace DoIT
         public MappingProfile()
         {
             CreateMap<Lector, LectorCreateDTO>().ReverseMap();
+            CreateMap<Student,StudentCreateDTO>().ReverseMap();
         }
     }
 }

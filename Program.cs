@@ -1,5 +1,9 @@
 using DoIT.Data;
+using DoIT.Data.Model;
+using DoIT.Data.Model.DTO;
 using DoIT.Services;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,8 +12,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer
 (builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddControllers().AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<LectorCreateValidator>()).AddNewtonsoftJson(
+    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+    );
+
+
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<LectorService>();
+builder.Services.AddScoped<StudentService>();
 //Scoped, Transient, Singleton lifetime.
 
 builder.Services.AddControllers();

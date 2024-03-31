@@ -1,4 +1,6 @@
-﻿namespace DoIT.Data.Model
+﻿using FluentValidation;
+
+namespace DoIT.Data.Model
 {
     public class Lector
     {
@@ -6,5 +8,6 @@
         public string Email { get; set; }
         public string Name { get; set; }
         public ICollection<Student> Students { get; set; }
+
     }
 }

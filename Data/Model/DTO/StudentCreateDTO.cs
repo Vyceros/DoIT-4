@@ -1,12 +1,14 @@
-﻿namespace DoIT.Data.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DoIT.Data.Model.DTO
 {
-    public class Student
+    public class StudentCreateDTO
     {
-        public int Id { get; set; }
+
         public string Name { get; set; }
         public string Email { get; set; }
         public float Gpa { get; set; }
-        public Lector Lector { get; set; }
         public int LectorId { get; set; }
+
     }
 }
