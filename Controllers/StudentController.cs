@@ -37,7 +37,7 @@ namespace DoIT.Controllers
         {
             return await _studentService.GetStudentById(id);
         }
-
+        [HttpPut]
         public async Task<StudentCreateDTO> UpdateStudent(int id,StudentCreateDTO student)
         {
             return await _studentService.UpdateLector(id, student);

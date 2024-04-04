@@ -25,15 +25,20 @@ namespace DoIT.Services
             {
                 var student = _mapper.Map<Student>(model);
 
-                var lector = await _db.Lectors.FirstOrDefaultAsync(x=> x.Id == student.LectorId);
+                var lector = await _db.Lectors.Include(l => l.Students).FirstOrDefaultAsync(x => x.Id == student.LectorId);
 
-                if(lector != null)
+                if (lector != null)
                 {
                     student.Lector = lector;
+                    if (lector.Students == null)
+                    {
+                        lector.Students = new List<Student>();
+                    }
+
+                    lector.Students.Add(student);
                 }
 
                 await _db.AddAsync(student);
-
                 await _db.SaveChangesAsync();
 
                 return true;
