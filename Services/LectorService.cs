@@ -8,29 +8,28 @@ using DoIT.Data;
 using DoIT.Data.Model;
 using DoIT.Data.Model.DTO;
 using Microsoft.AspNetCore.Http.HttpResults;
+using DoIT.Interfaces;
 
 namespace DoIT.Services
 {
-    public class LectorService
+    public class LectorService : ILectorService
     {
         // CreateLector, GetAllLector, GetLectorById, UpdateLector, DeleteLector
 
         private readonly ApplicationDbContext _db;
-        private readonly IMapper _mapper;
-
-        public LectorService(ApplicationDbContext db, IMapper mapper)
+        /*private readonly IMapper _mapper;*/
+        public LectorService(ApplicationDbContext db)
         {
             _db = db;
-            _mapper = mapper;
+            /*_mapper = mapper;*/
         }
 
         public async Task<ICollection<Lector>> GetAll()
         {
             try
             {
-                var students = await _db.Lectors.ToListAsync();
-
-                return students;
+                var lectors = await _db.Lectors.ToListAsync();
+                return lectors;
             }
             catch (Exception)
             {
@@ -38,7 +37,7 @@ namespace DoIT.Services
             }
         }
 
-        public async Task<bool> CreateLector(LectorCreateDTO model)
+        /*public async Task<bool> CreateLector(LectorCreateDTO model)
         {
             try
             {
@@ -77,7 +76,7 @@ namespace DoIT.Services
             }
         }
 
-        public async Task<Lector> GetLectorById(int id)
+        public async Task<Lector> GetById(int id)
         {
             try
             {
@@ -92,7 +91,7 @@ namespace DoIT.Services
             }
         }
 
-        public async Task<LectorCreateDTO> UpdateLector(int id,LectorCreateDTO lector)
+        public async Task<bool> UpdateLector(int id,LectorCreateDTO lector)
         {
             var oldLector = await _db.Lectors.FindAsync(id);
 
@@ -104,8 +103,8 @@ namespace DoIT.Services
                 await _db.SaveChangesAsync();
             }
 
-            return null;
-        }
+            return true;
+        }*/
         
     }
 }

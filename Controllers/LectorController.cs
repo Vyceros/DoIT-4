@@ -3,6 +3,7 @@ using DoIT.Data.Model.DTO;
 using DoIT.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using DoIT.Interfaces;
 
 namespace DoIT.Controllers
 {
@@ -10,11 +11,11 @@ namespace DoIT.Controllers
     [ApiController]
     public class LectorController : ControllerBase
     {
-        private readonly LectorService _lectorService;
+        private readonly ILectorService _lectorService;
 
-        public LectorController(LectorService sectorService)
+        public LectorController(ILectorService ILectorService)
         {
-            _lectorService = sectorService;
+            _lectorService = ILectorService;
         }
 
         [HttpGet]
@@ -23,7 +24,7 @@ namespace DoIT.Controllers
             return await _lectorService.GetAll();
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public async Task<bool> Create(LectorCreateDTO model)
         {
             return await _lectorService.CreateLector(model);
@@ -37,14 +38,14 @@ namespace DoIT.Controllers
         [HttpGet("{id}")]
         public async Task<Lector> GetLectorById(int id)
         {
-            return await _lectorService.GetLectorById(id);
+            return await _lectorService.GetById(id);
         }
         [HttpPut("{id}")]
-        public async Task<LectorCreateDTO> EditLector(int id, LectorCreateDTO lector)
+        public async Task<bool> EditLector(int id, LectorCreateDTO lector)
         {
             return await _lectorService.UpdateLector(id,lector);
             
-        }
+        }*/
         /*[HttpPut("{id}")]
         public async Task<LectorCreateDTO> EditLector([FromRoute] int id, [FromBody] LectorCreateDTO lector)
         {
